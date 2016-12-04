@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--   <link rel="stylesheet" type="text/css" href="homePage.css">-->
+  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/foundation.css">
+  <head>
+    <title>
+    區塊鏈捐款平台
+    </title>
+  </head>
+  <body >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <!-- Navigation -->
+    <nav>
+      <ul class="w3-navbar w3-red">
+        <h4 style="float:left"><i>Welcome to EthDontate</i></h4>
+        
+        <li style="float:right"><a href="/member" >Member</a></li>
+        <li style="float:right"><a href="/foundation">Donate</a></li>
+        <li style="float:right"><a href="/about" >About</a></li>
+        <li style="float:right"><a href="/" >Home</a></li>
+      </ul>
+    </nav>
+    <h1 class="w3-center">捐款專案</h1>
+    <div style="width:100%;" align="center">
+      <% for (var i = 0; i < contracts.length; i++) { %>
+      <div class="w3-center w3-padding-64" style="float:left; width:33%;text-align:left; ">
+        <h4>
+        合約地址:<a href="/foundation/<%= contracts[i].address %>"><%= contracts[i].address %></a>
+        </h4>
+        <h4>基金會: <%= contracts[i].fName %></h4>
+        <h4>專案名稱: <%= contracts[i].projectName %></h4>
+        <h4>簡介: <%= contracts[i].description %></h4>
+      </div>
+      <% } %>
+    </div>
+    <!-- Footer -->
+    <footer class="w3-padding-64 w3-center w3-black w3-xlarge">
+    </footer>
+  </body>
+</html>

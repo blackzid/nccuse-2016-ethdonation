@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <table>
+      <tr>
+        <th>address</th><th>project name</th>
+      </tr>
+      <% for (var i = 0; i < donors.length; i++) { %>
+      <tr>
+        <td><a href="/foundation/<%= donors[i].address %>"> <%= donors[i].address %> </a></td>
+
+        <td><%= existingContracts[i].projectName %></td>
+      </tr>
+      <% } %>
+    </table>
+  </body>
+</html>

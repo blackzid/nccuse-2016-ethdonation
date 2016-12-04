@@ -1,0 +1,8 @@
+INSTALL
+
+npm install
+
+
+RUN
+
+node app.js

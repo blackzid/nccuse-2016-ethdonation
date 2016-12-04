@@ -1,4 +1,4 @@
-./bin
+bin/
 *.bak
 *.log 
 *.DS_Store

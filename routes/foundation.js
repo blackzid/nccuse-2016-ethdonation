@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
-
+require('bootstrap')
 var fs = require("fs");
+
 
 var Web3 = require("../web3");
 var doneeABI = Web3.doneeABI
@@ -58,7 +59,7 @@ router.get('/:foundationAddress', function(req, res) {
         contractAddress: addr,
         fName: contract.getFoundationName(),
         fProjectName: contract.getProjectname(),
-        contractBalance: web3.fromWei(contract.getBalance(), "ether"),
+        contractBalance: web3.fromWei(contract.receivedBalance(), "ether"),
         fDescription: contract.getDescription(),
         donors: donorList
     });

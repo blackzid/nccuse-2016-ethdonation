@@ -16,3 +16,11 @@ footer
     bottom: 0px;
     width: 100%;
 }
+h3
+{
+    font-size: 2vw;
+}
+table, td{
+    border-style: inset;
+    border-width: 1px;
+}

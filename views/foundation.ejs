@@ -18,7 +18,7 @@
         <h4 style="float:left"><i>Welcome to EthDontate</i></h4>
         
         <li style="float:right"><a href="/member" >Member</a></li>
-        <li style="float:right"><a href="/foundation">Donate</a></li>
+        <li style="float:right"><a href="/foundation">Projects</a></li>
         <li style="float:right"><a href="/about" >About</a></li>
         <li style="float:right"><a href="/" >Home</a></li>
       </ul>
@@ -26,18 +26,18 @@
     <h1 class="w3-center">捐款專案</h1>
     <div style="width:100%;" align="center">
       <% for (var i = 0; i < contracts.length; i++) { %>
-      <div class="w3-center w3-padding-64" style="float:left; width:33%;text-align:left; ">
-        <h4>
-        合約地址:<a href="/foundation/<%= contracts[i].address %>"><%= contracts[i].address %></a>
+      <div class="w3-center w3-padding-64" style="float:left; width:33%;text-align:left;">
+        <h4 style="font-size: 1vw">
+        合約位址:<a href="/foundation/<%= contracts[i].address %>"><%= contracts[i].address %></a>
         </h4>
-        <h4>基金會: <%= contracts[i].fName %></h4>
-        <h4>專案名稱: <%= contracts[i].projectName %></h4>
-        <h4>簡介: <%= contracts[i].description %></h4>
+        <h4 style="font-size: 1vw">基金會: <%= contracts[i].fName %></h4>
+        <h4 style="font-size: 1vw">專案名稱: <%= contracts[i].projectName %></h4>
+        <h4 style="font-size: 1vw">簡介: <%= contracts[i].description %></h4>
       </div>
       <% } %>
     </div>
     <!-- Footer -->
-    <footer class="w3-padding-64 w3-center w3-black w3-xlarge">
+    <footer class="w3-padding-64 w3-center w3-black w3-xlarge" >
     </footer>
   </body>
 </html>

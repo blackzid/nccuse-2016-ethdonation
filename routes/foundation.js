@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-require('bootstrap')
 var fs = require("fs");
 
 
@@ -26,7 +25,7 @@ function updateContracts() {
 }
 // GET home page
 router.get('/', function(req, res, next) {
-	updateContracts()
+    updateContracts()
     res.render('foundation', {
         contracts: existingContracts
     });
@@ -37,20 +36,20 @@ router.get('/', function(req, res, next) {
 router.get('/:foundationAddress', function(req, res) {
     var addr = req.params.foundationAddress;
     var contract = eth.contract(foundationABI).at(addr);
-    
+
     var donorList = [];
     for (var i = 0; i < contract.getDonorCount(); i++) {
         var donorAddr = contract.donorindex(i);
         donorInfo = contract.donorList(donorAddr);
-        var doneeList = []; 
-        for (var j = 0; j < donorInfo[2]; j++){
-            var donee = contract.getDoneeFromDonor(donorAddr, j); 
-            doneeList.push({address:donee[1], donation:web3.fromWei(donee[0], "ether")})
+        var doneeList = [];
+        for (var j = 0; j < donorInfo[2]; j++) {
+            var donee = contract.getDoneeFromDonor(donorAddr, j);
+            doneeList.push({ address: donee[1], donation: web3.fromWei(donee[0], "ether") })
         }
-        donorList.push({ 
-            donorAddress: donorAddr, 
-            donation: web3.fromWei(donorInfo[1], "ether"), 
-            doneeList:doneeList
+        donorList.push({
+            donorAddress: donorAddr,
+            donation: web3.fromWei(donorInfo[1], "ether"),
+            doneeList: doneeList
         });
     }
     // console.log(donorList)
@@ -65,19 +64,71 @@ router.get('/:foundationAddress', function(req, res) {
     });
 
     // contract.setDescription("we need help", {from:"0x116a7e500de44305f7673a5e30cc5b3f921dd771", value: 0}, function(err, result){
-    // 	if (err != null) {
-    // 		console.log("error: ",err);
-    // 	} else {
-    // 		console.log(result);
-    // 		res.render('foundation', {
-    // 			title: 'Express',
-    // 			contractAddress:addr,
-    // 			fName:contract.getFoundationName(),
-    // 			fProjectName:contract.getProjectname(),
-    // 			contractBalance:contract.getBalance(),
-    // 			fDescription: contract.getDescription()
-    // 		});
-    // 	}
+    //  if (err != null) {
+    //      console.log("error: ",err);
+    //  } else {
+    //      console.log(result);
+    //      res.render('foundation', {
+    //          title: 'Express',
+    //          contractAddress:addr,
+    //          fName:contract.getFoundationName(),
+    //          fProjectName:contract.getProjectname(),
+    //          contractBalance:contract.getBalance(),
+    //          fDescription: contract.getDescription()
+    //      });
+    //  }
     // });
+})
+router.get('/:foundationAddress/manage', function(req, res) {
+    var addr = req.params.foundationAddress;
+    var contract = eth.contract(foundationABI).at(addr);
+    var donorList = [];
+    for (var i = 0; i < contract.getDonorCount(); i++) {
+        var donorAddr = contract.donorindex(i);
+        donorInfo = contract.donorList(donorAddr);
+        var doneeList = [];
+        for (var j = 0; j < donorInfo[2]; j++) {
+            var donee = contract.getDoneeFromDonor(donorAddr, j);
+            doneeList.push({ address: donee[1], donation: web3.fromWei(donee[0], "ether") })
+        }
+        donorList.push({
+            donorAddress: donorAddr,
+            donation: web3.fromWei(donorInfo[1], "ether"),
+            doneeList: doneeList
+        });
+    }
+    res.render('manage', {
+        contractAddress: addr,
+        fName: contract.getFoundationName(),
+        fProjectName: contract.getProjectname(),
+        contractBalance: web3.fromWei(contract.receivedBalance(), "ether"),
+        fDescription: contract.getDescription(),
+        donors: donorList
+    });
+})
+router.post('/:foundationAddress/manage', function(req, res) {
+    console.log("Transfer Ether Post")
+    var addr = req.params.foundationAddress;
+    var contract = eth.contract(foundationABI).at(addr);
+    if (req.body["donor-address"] != "" && req.body["donee-address"] != "" && req.body["ether"] > 0) {
+        console.log(req.body["donor-address"])
+        console.log(req.body["donee-address"])
+        console.log(req.body["ether"])
+
+        contract.transferDonation(
+            req.body["donor-address"],
+            req.body["ether"],
+            req.body["donee-address"], {from: "0x001a0233f5696de3a3021211074f70aba0a2b9e5", value: 0, gas:300000},
+            function(err, result) {
+                if (err != null) {
+                    console.log("error: ", err);
+                } else {
+                    console.log(result);
+                }
+            });
+        return res.redirect('/foundation/' + addr + "/manage");
+    } else {
+        console.log("Wrong Inputs")
+    }
 })
 module.exports = router;

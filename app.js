@@ -15,7 +15,9 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+app.set('view options', {
+    layout: true
+});
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -27,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', home);
 app.use('/foundation', foundation);
 app.use('/member', member);
-app.use('/donee', donee);
+app.use('/donee', donee); 
 
 
 

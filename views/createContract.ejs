@@ -1,0 +1,32 @@
+<%- include header %>
+    <form class="form-horizontal" method="post" >
+    <div class="control-group">
+      <label class="control-label" for="creator">擁有者</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge" id="creator" name="creator">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="foundationName">基金會名稱</label>
+      <div class="controls">
+        <input type="number" class="input-xlarge" id="foundationName" name="foundationName">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="projectName">專案名稱</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge" id="projectName" name="projectName">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="description">簡介</label>
+      <div class="controls">
+        <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+      </div>
+    </div>
+    <p></p>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-danger">建立合約</button>
+    </div>
+  </form>
+<%- include footer %>

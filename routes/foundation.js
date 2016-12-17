@@ -30,6 +30,12 @@ router.get('/', function(req, res, next) {
         contracts: existingContracts
     });
 });
+router.get('/create', function(req, res) {
+
+})
+router.post('/create', function(req, res) {
+    
+})
 // router.locals.toContract = function(addr){
 // }
 //specific contract
@@ -62,22 +68,6 @@ router.get('/:foundationAddress', function(req, res) {
         fDescription: contract.getDescription(),
         donors: donorList
     });
-
-    // contract.setDescription("we need help", {from:"0x116a7e500de44305f7673a5e30cc5b3f921dd771", value: 0}, function(err, result){
-    //  if (err != null) {
-    //      console.log("error: ",err);
-    //  } else {
-    //      console.log(result);
-    //      res.render('foundation', {
-    //          title: 'Express',
-    //          contractAddress:addr,
-    //          fName:contract.getFoundationName(),
-    //          fProjectName:contract.getProjectname(),
-    //          contractBalance:contract.getBalance(),
-    //          fDescription: contract.getDescription()
-    //      });
-    //  }
-    // });
 })
 router.get('/:foundationAddress/manage', function(req, res) {
     var addr = req.params.foundationAddress;
@@ -131,4 +121,5 @@ router.post('/:foundationAddress/manage', function(req, res) {
         console.log("Wrong Inputs")
     }
 })
+
 module.exports = router;

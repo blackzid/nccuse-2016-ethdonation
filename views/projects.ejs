@@ -1,0 +1,35 @@
+<%- include header %>
+<h1 class="w3-center ">捐款專案</h1>
+
+<% contracts.forEach(function(contract, index) { 
+  if (index % 3 == 0) { %>
+    <div class="row">
+<%} %>
+  <div class="col-sm-4">
+    <h4 style="font-size: 1vw">
+    合約位址:<a class="text-info" href="/projects/<%= contract.address %>"><%= contract.address %></a>
+    </h4>
+    <h4 style="font-size: 1vw">基金會: <%= contract.fName %></h4>
+    <h4 style="font-size: 1vw">專案名稱: <%= contract.projectName %></h4>
+    <h4 style="font-size: 1vw">簡介: <%= contract.description %></h4>
+  </div>
+<% if (index % 3 == 2) { %>
+    </div>
+<% } %>
+<%}) %>
+
+
+<% if (isAdmin) { %>
+<div class="col-sm-12" align="center">
+  <a type="submit" class="btn btn-danger" href="/projects/create">建立新專案合約</a>
+</div>
+<% } %>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+socket.on("contractMined", function (data) {
+  window.location.reload()
+});
+</script>
+<%- include footer %>

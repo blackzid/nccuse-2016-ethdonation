@@ -1,11 +1,11 @@
 <%- include header %>
 <div align="center" style="text-align:left; width:50%; margin:0px auto;">
-  <h2>合約位址: <%= contractAddress %></h2>
-  <h2>基金會: <%= fName %></h2>
-  <h2>專案名稱: <%= fProjectName %></h2>
-  <h2>目前捐款金額: <%= contractBalance %> ether</h2>
-  <h2>簡介: <%= fDescription %></h2>
-  <h2>捐款明細:</h2>
+  <h3>合約位址: <%= contractAddress %></h3>
+  <h3>基金會: <%= fName %></h3>
+  <h3>專案名稱: <%= fProjectName %></h3>
+  <h3>目前捐款金額: <%= contractBalance %> ether</h3>
+  <h4>簡介: <%= fDescription %></h4>
+  <h4>捐款明細:</h4>
   <% if (donors.length != 0) { %>
   <table class="table table-bordered" >
     <thead>
@@ -17,14 +17,14 @@
       <% for (var i = 0; i < donors.length; i++) { %>
       <tr>
         <td> <%= donors[i].donorAddress%> </td>
-        <td><%= donors[i].donation %> ether</td>
+        <td class="text-danger"><%= donors[i].donation %> ether</td>
         <% if (donors[i].doneeList.length == 0) { %>
         <td>尚未處理</td>
         <% } else {%>
         <td>
           <% for (var j = 0; j < donors[i].doneeList.length; j++) { %>
-          <p>
-            <a href="/donee/<%= donors[i].doneeList[j].address %>"><%= donors[i].doneeList[j].address %></a>
+          <p class="text-danger">
+            <a class="text-info" href="/donee/<%= donors[i].doneeList[j].address %>"><%= donors[i].doneeList[j].address %></a>
             <%= donors[i].doneeList[j].donation %> ether
           </p>
           <% } %>
@@ -62,4 +62,11 @@
     </div>
   </form>
 </div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+socket.on("transferEther", function (data) {
+  window.location.reload()
+});
+</script>
 <%- include footer %>

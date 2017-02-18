@@ -1,0 +1,21 @@
+<%- include header %>
+<h1 class="w3-center">需要幫助的人們</h1>
+<% donees.forEach(function(donee, index) { 
+  if (index % 3 == 0) { %>
+    <div class="row">
+<%} %>
+  <div class="col-sm-4">
+    <h4 style="font-size: 1vw">
+    合約位址:<a class="text-info" href="/donee/<%= donee.address %>"><%= donee.address %></a>
+    </h4>
+    <h4 style="font-size: 1vw">基金會: <%= donee.doneeName %></h4>
+    <h4 style="font-size: 1vw">簡介: <%= donee.description %></h4>
+  </div>
+<% if (index % 3 == 2) { %>
+    </div>
+<% } %>
+<%}) %>
+
+
+
+<%- include footer %>
